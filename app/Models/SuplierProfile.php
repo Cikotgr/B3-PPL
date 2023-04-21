@@ -17,12 +17,18 @@ class SuplierProfile extends Model
         'bussines_name',
         'bussines_email',
         'bussines_telephone',
-        'description'
+        'description',
+        'photo_profile'
+
     ];
     
     protected $guarded = ['id'];
 
     public function fkUsers(){
         return $this->belongsTo(User::class,'user_id', 'id');
+    }
+
+    public function fkProduct(){
+        return $this->hasMany(Product::class, 'supplier_profile_id', 'id');
     }
 }

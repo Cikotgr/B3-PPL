@@ -46,5 +46,10 @@ class User extends Authenticatable
 
     public function fkSuplierProfile(){
         return $this->hasOne(SuplierProfile::class,'user_id', 'id');
+
+    }
+
+    public function fkRoles(){
+        return $this->belongsTo(Roles::class,'role_id','id');
     }
 }
