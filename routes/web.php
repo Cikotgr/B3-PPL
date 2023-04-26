@@ -3,6 +3,7 @@
 use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SuplierProfilesController;
+use App\Http\Controllers\SupplierAllController;
 use App\Models\SuplierProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/getregency',[IndoRegionController::class, 'getregency'])->name('getregency');
 
-
+Route::get('/supplier',[SupplierAllController::class,'index'])->name('supplier_all.index');
+Route::get('/supplier/profile{id}',[SupplierAllController::class,'show'])->name('supplier_all.show');
+Route::get('/supplier/profile/product{id}',[SupplierAllController::class,'product'])->name('supplier_all.show.product');
 // Route::get('/post',[PostsController::class, 'index'])->name('post.index');

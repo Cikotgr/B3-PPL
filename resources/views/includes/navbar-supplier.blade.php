@@ -16,6 +16,11 @@
                     beralih ke halaman suplier
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('supplier_all.index') }}" class="nav-link">
+                    Supplier
+                </a>
+            </li>
             <!-- Authentication Links -->
             @guest
                 @if (Route::has('login'))
