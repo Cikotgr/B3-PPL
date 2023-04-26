@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SuplierProfilesController;
 use App\Models\SuplierProfile;
@@ -25,5 +26,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+Route::post('/getregency',[IndoRegionController::class, 'getregency'])->name('getregency');
+
 
 // Route::get('/post',[PostsController::class, 'index'])->name('post.index');

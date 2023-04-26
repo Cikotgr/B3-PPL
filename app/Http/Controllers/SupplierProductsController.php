@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +42,8 @@ class SupplierProductsController extends Controller
         $file = $request->file('Photo');
         // dd($file);
         $filename = $supplier_id . time() . '.' . $file->getClientOriginalExtension();
-        $path = $request->file('Photo')->storeAs('public/products',$filename);
-        $path = str_replace('public/','',$path);
+        $path = $request->file('Photo')->storeAs('/products',$filename);
+        // $path = str_replace(,'',$path);
 
         Product::create([
             'supplier_profile_id' => $supplier_id,
@@ -72,8 +73,9 @@ class SupplierProductsController extends Controller
      */
     public function edit(string $id)
     {
-        $products = Product::find($id);
-        return view('supplier.product.update',compact('products'));
+        $type = ProductType::all();
+        $product = Product::find($id);
+        return view('supplier.product.update',compact('product','type'));
     }
 
     /**
@@ -81,6 +83,23 @@ class SupplierProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $file = $request->file('Photo');
+        // dd($file);
+        $filename = $id . time() . '.' . $file->getClientOriginalExtension();
+        $path = $request->file('Photo')->storeAs('/products',$filename);
+        // $path = str_replace('public/','',$path);
+        $product = Product::find($id);
+
+        $product->product_name = $request->ProductName;
+        $product->stock = $request->Stock;
+        $product->product_type_id = $request->ProductType;
+        $product->price = $request->Price;
+        $product->description= $request->Description;
+        $product->photo = $path;
+        $product->save();
+
+        return redirect()->route('supplier.product.index');
+
         
     }
 

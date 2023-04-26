@@ -14,7 +14,7 @@ Route::middleware(EnsureAuthSupplier::class)->group(function () {
         Route::post('/store', [SuplierProfilesController::class, 'store'])->name('store');
         Route::get('/create',[SuplierProfilesController::class, 'create'])->name('create');
         Route::get('/edit/{id}',[SuplierProfilesController::class, 'edit'])->name('edit');
-        Route::put('/update{id}',[SuplierProfilesController::class, 'update'])->name('update');
+        Route::put('/update/{id}',[SuplierProfilesController::class, 'update'])->name('update');
     });
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [SupplierProductsController::class, 'index'])->name('index');
@@ -22,6 +22,7 @@ Route::middleware(EnsureAuthSupplier::class)->group(function () {
         Route::post('/store', [SupplierProductsController::class, 'store'])->name('store');
         Route::get('/view{id}', [SupplierProductsController::class, 'show'])->name('show');
         Route::get('/edit{id}', [SupplierProductsController::class, 'edit'])->name('edit');
+        Route::put('/update{id}', [SupplierProductsController::class, 'update'])->name('update');
     });
     Route::get('/suplier/beranda', [SupplierHomeController::class, 'index'])->name('supplier.index');
 });

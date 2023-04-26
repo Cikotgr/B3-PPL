@@ -18,7 +18,11 @@ class SuplierProfile extends Model
         'bussines_email',
         'bussines_telephone',
         'description',
-        'photo_profile'
+        'photo_profile',
+        'banner',
+        'owner_email',
+        'address',
+        'city_id',
 
     ];
     
@@ -30,5 +34,14 @@ class SuplierProfile extends Model
 
     public function fkProduct(){
         return $this->hasMany(Product::class, 'supplier_profile_id', 'id');
+
+    }
+
+    public function fkBussinesType(){
+        return $this->belongsTo(BussinesType::class,'bussines_type_id','id');
+    }
+
+    public function fkRegency(){
+        return $this->belongsTo(Regency::class,'city_id','id');
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BussinesType;
+use App\Models\Province;
+use App\Models\Regency;
 use App\Models\SuplierProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +17,17 @@ class SuplierProfilesController extends Controller
      */
 public function index()
     {
+        $provinces = Province::all();
+        $regences = Regency::all();
+
         $user_id = Auth::user()->id;
-        
+        $types = BussinesType::all();
         $supplierprofiles = null;
         if(SuplierProfile::where('user_id', '=', $user_id)->exists()){
             $supplierprofiles = SuplierProfile::where('user_id', '=', $user_id)->get();
         }
         // dd($supplierprofiles[0]->id);
-        return view('supplier.profile.index',compact('supplierprofiles'));
+        return view('supplier.profile.index',compact('supplierprofiles','types','provinces', 'regences'));
     }
 
     /**
@@ -41,21 +47,33 @@ public function index()
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
-        $file = $request->file('PhotoProfile');
-        $filename = $user_id . '.' . $file->getClientOriginalExtension();
-        $path = $request->file('PhotoProfile')->storeAs('public/suplierprofile',$filename);
-        $path = str_replace('public/','',$path);
-        // dd($path);
+
+        $photoprofiles = $request->file('PhotoProfile');
+        $filename = $user_id . '.' . $photoprofiles->getClientOriginalExtension();
+        $pathphotoprofiles = $request->file('PhotoProfile')->storeAs('public/suplierprofile',$filename);
+        $pathphotoprofiles = str_replace('public/','',$pathphotoprofiles);
+
+        $banner = $request->file('Banner');
+        $filename = $user_id . '.' . $banner->getClientOriginalExtension();
+        $pathbanner = $request->file('Banner')->storeAs('public/suplierbanner',$filename);
+        $pathbanner = str_replace('public/','',$pathbanner);
+        
+        // dd($pathbanner);
+        
         SuplierProfile::create([
             'user_id'=> $user_id,
             'owner_name' => $request->OwnerName,
             'owner_telephone' => $request->OwnerTelephone,
+            'owner_email' => $request->OwnerEmail,
             'bussines_name' => $request->BussinesName,
             'bussines_email' => $request->BussinesEmail,
             'bussines_telephone' => $request->BussinesTelephone,
             'bussines_type_id'=> $request->BussinesType,
             'description' => $request->Description,
-            'photo_profile' => $path
+            'city_id' => $request->regency,
+            'address' => $request->Address,
+            'photo_profile' => $pathphotoprofiles,
+            'banner' =>  $pathbanner,
         ]);
 
         // dd($request->OwnerName);
@@ -77,8 +95,11 @@ public function index()
     public function edit($id)
     {
         $item = SuplierProfile::find($id);
-        // dd($supplierprofiles[0]->owner_name);
-        return view('supplier.profile.update',compact('item'));
+        $types = BussinesType::all();
+        $provinces = Province::all();
+        $regences = Regency::all();
+        // dd($supplierprofiles[0]->owner_name)
+        return view('supplier.profile.update',compact('item','types','regences','provinces'));
     }
 
     /**
@@ -87,10 +108,15 @@ public function index()
     public function update(Request $request, string $id)
     {
         // $file = $request->file('PhotoProfile');
-        $request->file('PhotoProfile')->storeAs($request->photo_profile);
+        
+        $file = $request->file('PhotoProfile');
+        $filename =  $id. '.' . $file->getClientOriginalExtension();
+        $path = $request->file('PhotoProfile')->storeAs('public/suplierprofile',$filename);
+        // $path = str_replace('public/','',$path);
+        // $request->file('PhotoProfile')->storeAs($request->photo_profile);
 
         $profiles = SuplierProfile::find($id);
-        $profiles->user_id = $profiles->user_id;
+        // dd($profiles);
         $profiles->owner_name = $request->OwnerName;
         $profiles->owner_telephone = $request->OwnerTelephone;
         $profiles->bussines_name =  $request->BussinesName;
@@ -98,7 +124,7 @@ public function index()
         $profiles->bussines_telephone = $request->BussinesTelephone;
         $profiles->bussines_type_id = $request->BussinesType;
         $profiles->description = $request->Description;
-        $profiles->photo_profile = $profiles->photo_profile;
+        $profiles->photo_profile = $path;
         $profiles->save();
 
         return redirect()->route('supplier.profile.index');

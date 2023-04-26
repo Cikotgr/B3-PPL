@@ -24,4 +24,8 @@ class Product extends Model
     public function fkSupplier(){
         return $this->belongsTo(SuplierProfile::class,'supplier_profile_id','id');
     }
+
+    public function fkProductType(){
+        return $this->belongsTo(ProductType::class, 'product_type_id', 'id');
+    }
 }
