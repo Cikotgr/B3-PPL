@@ -19,7 +19,12 @@
         </div>
         <div class="mb-3">
             <label for="ProductType" class="form-label">Product type</label>
-            <input type="number" class="form-control" name="ProductType" placeholder="Masukan stock">
+            {{-- <input type="number" class="form-control" name="ProductType" placeholder="Masukan stock"> --}}
+            <select class="form-select" aria-label="Default select example" name="ProductType">
+                @foreach ($type as $type_item)
+                    <option value="{{ $type_item->id }}">{{ $type_item->product_type }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="Price" class="form-label">Harga</label>

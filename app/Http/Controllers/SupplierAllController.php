@@ -25,7 +25,8 @@ class SupplierAllController extends Controller
     }
 
     public function product(string $id){
-        return view('suplier_all.viewproduct');
+        $product = Product::find($id);
+        return view('suplier_all.viewproduct',compact('product'));
     }
 
 }

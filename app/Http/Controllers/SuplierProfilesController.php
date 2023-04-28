@@ -111,20 +111,27 @@ public function index()
         
         $file = $request->file('PhotoProfile');
         $filename =  $id. '.' . $file->getClientOriginalExtension();
-        $path = $request->file('PhotoProfile')->storeAs('public/suplierprofile',$filename);
+        $pathphotoprofile = $request->file('PhotoProfile')->storeAs('suplierprofile',$filename);
         // $path = str_replace('public/','',$path);
         // $request->file('PhotoProfile')->storeAs($request->photo_profile);
+        $file = $request->file('Banner');
+        $filename =  $id. '.' . $file->getClientOriginalExtension();
+        $pathbanner = $request->file('Banner')->storeAs('suplierbanner',$filename);
+
 
         $profiles = SuplierProfile::find($id);
         // dd($profiles);
         $profiles->owner_name = $request->OwnerName;
         $profiles->owner_telephone = $request->OwnerTelephone;
+        $profiles->owner_email = $request->OwnerEmail;
         $profiles->bussines_name =  $request->BussinesName;
         $profiles->bussines_email = $request->BussinesEmail;
         $profiles->bussines_telephone = $request->BussinesTelephone;
         $profiles->bussines_type_id = $request->BussinesType;
         $profiles->description = $request->Description;
-        $profiles->photo_profile = $path;
+        $profiles->photo_profile = $pathphotoprofile;
+        $profiles->banner = $pathbanner;
+
         $profiles->save();
 
         return redirect()->route('supplier.profile.index');

@@ -49,14 +49,14 @@
             @foreach ($supplierprofiles as $item)
                 @if ($item->photo_profile != null)
                     <div style="width:150px">
-                        <img src="{{ asset('storage/public/' . $item->photo_profile) }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('storage/' . $item->photo_profile) }}" class="img-fluid" alt="...">
                     </div>
                 @else
                     <p class="text-info">tidak ada foto</p>
                 @endif
                 @if ($item->banner != null)
                     <div style="width:150px">
-                        <img src="{{ asset('storage/public/' . $item->banner) }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('storage/' . $item->banner) }}" class="img-fluid" alt="...">
                     </div>
                 @else
                     <p class="text-info">tidak ada foto</p>

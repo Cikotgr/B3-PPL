@@ -66,7 +66,7 @@
             </div>
             <div class="mb-3">
                 <label for="OwnerEmail" class="form-label">Masukan emaill pemilik</label>
-                <input type="email" class="form-control" name="OwnerEmail" placeholder="{{ $item->owner_email }}">
+                <input type="email" class="form-control" name="OwnerEmail" value="{{ $item->owner_email }}">
             </div>
             <div class="mb-3">
                 <label for="BussinesName" class="form-label">Nama Toko</label>

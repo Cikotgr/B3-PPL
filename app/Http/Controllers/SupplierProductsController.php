@@ -28,8 +28,8 @@ class SupplierProductsController extends Controller
     public function create()
     {
         
-        
-        return view('supplier.product.create');
+        $type = ProductType::all();
+        return view('supplier.product.create',compact('type'));
     }
 
     /**
@@ -64,8 +64,8 @@ class SupplierProductsController extends Controller
      */
     public function show(string $id)
     {
-        $products = Product::find($id);
-        return view('supplier.product.view',compact('products'));
+        $product = Product::find($id);
+        return view('supplier.product.view',compact('product'));
     }
 
     /**
