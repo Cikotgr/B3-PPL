@@ -39,6 +39,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('supplier.')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/supplier.php'));
+
+            Route::prefix('homeindustri')
+                ->middleware('web')
+                ->name('homeindustri.')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/homeindustri.php'));
         });
     }
 

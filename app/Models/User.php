@@ -49,6 +49,11 @@ class User extends Authenticatable
 
     }
 
+    public function fkHomeindustriProfile(){
+        return $this->hasOne(HomeindustriProfile::class,'user_id', 'id');
+
+    }
+
     public function fkRoles(){
         return $this->belongsTo(Roles::class,'role_id','id');
     }

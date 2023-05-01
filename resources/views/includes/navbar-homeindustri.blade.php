@@ -11,6 +11,11 @@
 
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="{{ route('supplier_all.index') }}" class="nav-link">
+                    Supplier
+                </a>
+            </li>
             <!-- Authentication Links -->
             @guest
                 @if (Route::has('login'))
@@ -33,9 +38,12 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        {{-- <a class="dropdown-item" href="{{ route('supplier.profile.index') }}">
+                        <a class="dropdown-item" href="{{ route('homeindustri.profile.index') }}">
                             Profil
-                        </a> --}}
+                        </a>
+                        <a class="dropdown-item" href="{{ route('auth.show') }}">
+                            Akun
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">

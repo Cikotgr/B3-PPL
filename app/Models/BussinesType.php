@@ -14,4 +14,8 @@ class BussinesType extends Model
     public function fkSupplierProfile(){
         return $this->hasMany(SuplierProfile::class, 'bussines_type_id', 'id');
     }
+
+    public function fkHomeindustriProfile(){
+        return $this->hasMany(HomeindustriProfile::class, 'bussines_type_id', 'id');
+    }
 }

@@ -58,4 +58,8 @@ class Regency extends Model
     public function fkSupplierProfiles(){
         return $this->hasMany(SuplierProfile::class,'city_id','id');
     }
+
+    public function fkHomeindustriProfile(){
+        return $this->hasMany(HomeindustriProfile::class,'city_id','id');
+    }
 }
