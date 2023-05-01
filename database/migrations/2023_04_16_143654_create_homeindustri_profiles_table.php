@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('bussines_name');
             $table->string('bussines_email');
             $table->string('bussines_telephone');
-            $table->string('bussines_material');
+            // $table->string('bussines_material');
             
             $table->timestamps();
         });
