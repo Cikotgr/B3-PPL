@@ -79,7 +79,11 @@
 
     <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+<<<<<<< HEAD
             <h1 class="fw-bold text-primary m-0">K<span class="text-secondary">or</span>sa</h1>
+=======
+            <h1 class="fw-bold text-primary m-0">F<span class="text-secondary">oo</span>dy</h1>
+>>>>>>> edb9f9bb1bc6ea0d5fd3f3ab2897cd2cf5bda072
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
