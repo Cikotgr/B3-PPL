@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileValidationRequest;
 use App\Models\BussinesType;
 use App\Models\Province;
 use App\Models\Regency;
@@ -9,6 +10,7 @@ use App\Models\SuplierProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SuplierProfilesController extends Controller
 {
@@ -44,7 +46,7 @@ public function index()
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProfileValidationRequest $request)
     {
         $user_id = Auth::user()->id;
 
@@ -60,7 +62,7 @@ public function index()
         
         // dd($pathbanner);
         
-        SuplierProfile::create([
+        $data = [
             'user_id'=> $user_id,
             'owner_name' => $request->OwnerName,
             'owner_telephone' => $request->OwnerTelephone,
@@ -74,11 +76,19 @@ public function index()
             'address' => $request->Address,
             'photo_profile' => $pathphotoprofiles,
             'banner' =>  $pathbanner,
-        ]);
+        ];
+
+        try{
+            SuplierProfile::create($data);
+            Alert::successs('Berhasil','Profile berhasil ditambahkan');
+            return redirect()->route('supplier.profile.index');
+        } catch (\Throwable $th){
+            Alert::error('Error', 'Profile gagal ditambahkan');
+            return redirect()->route('supplier.profile.index');
+        }
 
         // dd($request->OwnerName);
 
-        return redirect()->route('supplier.profile.index');
     }
 
     /**
@@ -109,6 +119,8 @@ public function index()
     {
         // $file = $request->file('PhotoProfile');
         
+        try{
+        
         $file = $request->file('PhotoProfile');
         $filename =  $id. '.' . $file->getClientOriginalExtension();
         $pathphotoprofile = $request->file('PhotoProfile')->storeAs('suplierprofile',$filename);
@@ -117,8 +129,8 @@ public function index()
         $file = $request->file('Banner');
         $filename =  $id. '.' . $file->getClientOriginalExtension();
         $pathbanner = $request->file('Banner')->storeAs('suplierbanner',$filename);
-
-
+        
+        
         $profiles = SuplierProfile::find($id);
         // dd($profiles);
         $profiles->owner_name = $request->OwnerName;
@@ -131,10 +143,17 @@ public function index()
         $profiles->description = $request->Description;
         $profiles->photo_profile = $pathphotoprofile;
         $profiles->banner = $pathbanner;
+        
+            $profiles->save();
+            // SuplierProfile::create($data);
+            Alert::success('Berhasil','Profile berhasil ditambahkan');
+            return redirect()->route('supplier.profile.index');
+        } catch (\Throwable $th){
+            Alert::error('Error', 'Profile gagal ditambahkan');
+            return redirect()->route('supplier.profile.index');
+        }
 
-        $profiles->save();
-
-        return redirect()->route('supplier.profile.index');
+        // return redirect()->route('supplier.profile.index');
         
     }
 

@@ -29,6 +29,7 @@
     </div>
 
     @yield('js')
+    @include('sweetalert::alert')
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcountsController;
+use App\Http\Controllers\HomeindustriAllController;
 use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SuplierProfilesController;
@@ -37,3 +38,6 @@ Route::get('/supplier',[SupplierAllController::class,'index'])->name('supplier_a
 Route::get('/supplier/profile{id}',[SupplierAllController::class,'show'])->name('supplier_all.show');
 Route::get('/supplier/profile/product{id}',[SupplierAllController::class,'product'])->name('supplier_all.show.product');
 // Route::get('/post',[PostsController::class, 'index'])->name('post.index');
+
+Route::get('/homeindustri', [HomeindustriAllController::class,'index'])->name('homeindustri_all.index');
+Route::get('/homeindustri/profile', [HomeindustriAllController::class,'show'])->name('homeindustri_all.show');
