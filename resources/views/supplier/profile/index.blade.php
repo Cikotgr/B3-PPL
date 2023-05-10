@@ -72,8 +72,8 @@
                         value="{{ $item->owner_telephone }}"disabled readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="BussinesName" class="form-label">Email pemilik</label></label>
-                    <input type="text" class="form-control" id="BussinesName" value="{{ $item->owner_email }}"disabled
+                    <label for="OwnerEmail" class="form-label">Email pemilik</label></label>
+                    <input type="text" class="form-control" id="OwnerEmail" value="{{ $item->owner_email }}"disabled
                         readonly>
                 </div>
                 <div class="mb-3">
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="BussinesTelephone" class="form-label">Deskripsi</label>
+                    <label for="Description" class="form-label">Deskripsi</label>
                     <div class="card">
                         <p>
                             {{ $item->description }}
@@ -135,34 +135,55 @@
                 <div class="mb-3">
                     <label for="OwnerName" class="form-label">Nama Pemilik</label>
                     <input type="text" class="form-control" name="OwnerName" placeholder="Masukan nama">
+                    @error('OwnerName')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="OwnerTelephone" class="form-label">No telepon pemilik</label>
                     <input type="text" class="form-control" name="OwnerTelephone"
                         placeholder="Isikan No telepon pemilik">
+                    @error('OwnerTelephone')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="OwnerEmail" class="form-label">Masukan emaill pemilik</label>
                     <input type="email" class="form-control" name="OwnerEmail" placeholder="Isikan Email Pemilik">
+                    @error('OwnerEmail')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="BussinesName" class="form-label">Nama Toko</label>
                     <input type="text" class="form-control" name="BussinesName" placeholder="Isikan Nama toko">
+                    @error('BussinesName')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="BussinesEmail" class="form-label">email toko</label>
                     <input type="email" class="form-control" name="BussinesEmail" placeholder="Isikan email toko">
+                    @error('BussinesEmail')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="BussinesTelephone" class="form-label">No telepon toko</label>
                     <input type="text" class="form-control" name="BussinesTelephone"
                         placeholder="Isikan No telepon pemilik">
+                    @error('BussinesTelephone')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="BussinesType" class="form-label">Type bisnis</label>
                     <select name="BussinesType" id="BussinesType" class="form-select"
                         aria-label="Default select example">
-                        <option value="">Pilih Salah satu bisnis</option>
+                        @error('BussinesType')
+                            <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                        @enderror
+                        <option>Pilih Salah satu bisnis</option>
                         @foreach ($types as $type)
                             <option value="{{ $type->id }}">{{ $type->bussines_type }}</option>
                         @endforeach
@@ -171,7 +192,10 @@
                 <div class="mb-3">
                     <label for="Provincy" class="form-label">Provinsi</label>
                     <select name="Provincy" id="provincy" class="form-select" aria-label="Default select example">
-                        <option value="">Pilih salah satu provinsi...</option>
+                        @error('Provincy')
+                            <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                        @enderror
+                        <option>Pilih salah satu provinsi...</option>
                         @foreach ($provinces as $provincy)
                             <option value="{{ $provincy->id }}">{{ $provincy->name }}</option>
                         @endforeach
@@ -188,11 +212,17 @@
                 <div class="mb-3">
                     <label for="Address" class="form-label">Masukan Alamat</label>
                     <textarea class="form-control" name="Address" rows="2"></textarea>
+                    @error('Address')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="Description" class="form-label">Masukan descripsi toko</label>
                     <textarea class="form-control" name="Description" rows="3"></textarea>
+                    @error('Description')
+                        <span class="me-2 text-danger fw-bold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-primary me-3">Simpan</button>
